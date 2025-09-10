@@ -23,7 +23,7 @@
 {% if records %}
 	{% for record in records %}
 		<tr>
-			<td>{{ record.first_name }} {{ record.last_name }}</td>
+			<td>{{ record.name }}</td>
 			<td>{{ record.email }}</td>
 			<td>{{ record.phone }}</td>
 			<td>{{ record.address }}</td>
@@ -31,7 +31,7 @@
 			<td>{{ record.state }}</td>
 			<td>{{ record.zipcode }}</td>
 			<td>{{ record.created_at }}</td>
-			<td><a href="#">{{ record.id }}</a></td>
+			<td><a href="{% url 'single_record' record.id %}">{{ record.id }}</a></td>
 		</tr>
 	{% endfor %}
 
