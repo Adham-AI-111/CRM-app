@@ -1,4 +1,5 @@
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -67,7 +68,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'crm_db',
         'USER' : 'root',
-        'PASSWORD' : '1/2/3/4/5/6/7/8/9/10',
+        'PASSWORD' : config('DB_password'),
         'HOST' : 'localhost',
         'PORT' : '3306',
     }
