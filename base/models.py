@@ -7,7 +7,8 @@ import mysql.connector
 #     user="root",
 #     password=
 #     database="crm_db",
-# )
+
+
 
 # coursorObj = MyDB.cursor()
 # coursorObj.execute("CREATE DATABASE IF NOT EXISTS crm_db")
