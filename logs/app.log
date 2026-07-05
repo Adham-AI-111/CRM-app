@@ -1,0 +1,18 @@
+2026-07-02 15:41:15,387 WARNING django.request:246 Not Found: /favicon.ico
+2026-07-02 15:45:28,966 INFO base.views:95 Record added successfully.
+2026-07-02 15:45:36,042 INFO base.views:66 record was deleted
+2026-07-02 16:38:07,594 WARNING django.request:246 Not Found: /favicon.ico
+2026-07-02 16:38:11,150 INFO base.views:95 Record added successfully.
+{"timestamp": 1782999675.3265803, "level": "WARNING", "logger": "django.request", "message": "Not Found: /favicon.ico"}
+{"timestamp": 1782999678.308362, "level": "INFO", "logger": "base.views", "message": "Record added successfully."}
+{"timestamp": 1782999714.3511875, "level": "INFO", "logger": "base.views", "message": "record was deleted"}
+{"timestamp": "2026-07-02 16:44:40,988", "level": "INFO", "logger": "base.views", "message": "record was deleted"}
+{"timestamp": "2026-07-02 16:49:53,724", "level": "INFO", "logger": "base.views", "message": "Record added successfully."}
+{"timestamp": "2026-07-02 16:50:08,973", "level": "INFO", "logger": "base.views", "message": "record was deleted", "function": "delete_record", "line": 66}
+{"timestamp": "2026-07-02 16:50:55,224", "level": "INFO", "logger": "base.views", "message": "Record added successfully.", "function": "add_record", "line": 96}
+{"timestamp": "2026-07-02 16:52:22,727", "level": "INFO", "logger": "base.views", "message": "record was deleted", "function": "delete_record", "line": 66}
+{"timestamp": "2026-07-02 16:59:02,942", "level": "INFO", "logger": "base.views", "message": "Record added successfully.", "function": "add_record", "line": 95}
+{"timestamp": "2026-07-02 16:59:16,086", "level": "INFO", "logger": "base.views", "message": "record was deleted", "function": "delete_record", "line": 66}
+{"name": "base.views", "msg": "record was deleted", "args": [], "levelname": "INFO", "levelno": 20, "pathname": "C:\\Users\\ROG\\Desktop\\logger_demo\\base\\views.py", "filename": "views.py", "module": "views", "exc_info": null, "exc_text": null, "stack_info": null, "lineno": 66, "funcName": "delete_record", "created": 1783000858.2864864, "msecs": 286.4863872528076, "relativeCreated": 4462.232828140259, "thread": 30740, "threadName": "Thread-1", "processName": "MainProcess", "process": 25056, "record_id": 34}
+{"user_id": 1}
+{"timestamp": "2026-07-02 17:15:01,105", "level": "INFO", "logger": "base.views", "message": "record was deleted", "function": "delete_record", "line": 66, "record_id": 35}

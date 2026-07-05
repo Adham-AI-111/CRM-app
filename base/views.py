@@ -58,32 +58,28 @@ def display_record(request, pk):
     return render(request, 'base/record.html') 
 
 
+@login_required
 def delete_record(request, pk):
-    if request.user.is_authenticated:
-        customer_record = Record.objects.get(id=pk)
-        customer_record.delete()
-        messages.success(request, "Record deleted successfully.")
-        return redirect('home')
-    else:
-        messages.error(request, "You must be logged in to perform that action.")
-        return redirect('home')
-    return render(request, 'base/record.html')
+    customer_record = Record.objects.get(id=pk)
+    customer_record.delete()
+    messages.success(request, "Record deleted successfully.")
+    logger.info('record was deleted', extra={'record_id': pk})
+    
+    return redirect('home')
 
 
+@login_required
 def update_record(request, pk):
-    if request.user.is_authenticated:
-        customer_record = Record.objects.get(id=pk)
-        form = UpdateRecordForm(instance=customer_record)
-        if request.method == 'POST':
-            form = UpdateRecordForm(request.POST, instance=customer_record)
-            if form.is_valid():
-                form.save()
-                messages.success(request, "Record updated successfully.")
-                return redirect('home')
-            else:
-                messages.error(request, "Update failed. Please correct the errors below.")
-                return render(request, 'base/update_record.html', {'form': form})
+    customer_record = Record.objects.get(id=pk)
+    form = UpdateRecordForm(instance=customer_record)
+    if request.method == 'POST':
+        form = UpdateRecordForm(request.POST, instance=customer_record)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Record updated successfully.")
+            return redirect('home')
         else:
+            messages.error(request, "Update failed. Please correct the errors below.")
             return render(request, 'base/update_record.html', {'form': form})
     return render(request, 'base/update_record.html')
 
@@ -93,13 +89,16 @@ def add_record(request):
     if request.method == 'POST':
         form = UpdateRecordForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Record added successfully.")
-            logger.info('record added successfully')
-            return redirect('home')
-        else:
-            messages.error(request, "Failed to add record. Please correct the errors below.")
-            return render(request, 'base/add_record.html', {'form': form})
+            try:
+                form.save()
+                messages.success(request, "Record added successfully.")
+                logger.info("Record added successfully.", extra={'user_id': request.user.id})
+                return redirect("home")
+
+            except Exception:
+                logger.exception(f"Failed to create a record")
+
     else:
         form = UpdateRecordForm()
-    return render(request, 'base/add_record.html')
+
+    return render(request, "base/add_record.html", {"form": form})

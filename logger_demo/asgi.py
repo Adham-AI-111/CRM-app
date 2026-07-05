@@ -1,5 +1,5 @@
 """
-ASGI config for CRM_Project project.
+ASGI config for logger_demo project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

@@ -1,0 +1,7 @@
+2026-07-01 19:30:56,053 INFO django.utils.autoreload:667 Watching for file changes with StatReloader
+2026-07-01 19:35:09,969 INFO django.utils.autoreload:265 C:\Users\ROG\Desktop\logger_demo\logger_demo\settings.py changed, reloading.
+2026-07-01 19:35:10,640 INFO django.utils.autoreload:667 Watching for file changes with StatReloader
+2026-07-01 19:39:27,721 INFO django.utils.autoreload:265 C:\Users\ROG\Desktop\logger_demo\logger_demo\settings.py changed, reloading.
+2026-07-01 19:39:28,358 INFO django.utils.autoreload:667 Watching for file changes with StatReloader
+2026-07-01 19:39:31,878 INFO django.utils.autoreload:265 C:\Users\ROG\Desktop\logger_demo\logger_demo\settings.py changed, reloading.
+2026-07-01 19:39:32,537 INFO django.utils.autoreload:667 Watching for file changes with StatReloader

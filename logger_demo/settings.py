@@ -115,13 +115,186 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+
+# --------------------------------------
+# Simple Config
+# --------------------------------------
+
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "handlers": {
+#         "console": {
+#             "class": "logging.StreamHandler",
+#         },
+#     },
+#     "root": {
+#         "handlers": ["console"],
+#         "level": "INFO",
+#     },
+#     "loggers": {
+#         "django": {
+#             "handlers": ["console"],
+#             "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+#             "propagate": False,
+#         },
+#     },
+# }
+
+
+# ----------------------------------
+# More Advance 
+# ----------------------------------
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+
+#     'formatters': {
+#         'simple': {
+#             'format': "{asctime} {levelname} {name}:{lineno} {message}",
+#             'style': '{',
+#         }
+#     },
+
+#     'handlers': {
+#         "file": {
+#             "class": "logging.handlers.TimedRotatingFileHandler",
+#             "filename": "logs/app.log",
+#             "when": "M",
+#             "interval": 1,
+#             "backupCount": 4,
+#             "formatter": "simple",
+#         },
+
+#         'console':{
+#             'formatter': 'simple',
+#             'class': 'logging.StreamHandler',
+#         }
+#     },
+
+#     'root': {
+#         'handlers': ['file', 'console'],
+#         'level': 'INFO',
+#     }
+# }
+
+
+# --------------------------------
+# Common For Production
+# --------------------------------
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+
+#     'formatters': {
+#         'simple': {
+#             'format': "{levelname}: {message}",
+#             'style': '{',
+#         },
+#         'details': {
+#             'format': "{asctime} {levelname} {name}:{lineno} {message}",
+#             'style': '{',
+#         }
+#     },
+
+#     'handlers': {
+#         'app_file': {
+#             'class': 'logging.handlers.TimedRotatingFileHandler',
+#             'filename': BASE_DIR / "logs" / "app.log",
+#             'level': 'INFO',
+#             'when': 'midnight',
+#             'interval': 1,
+#             'backupCount': 15,
+#             'formatter': 'details'
+#         },
+#         'error_file': {
+#             'class': 'logging.handlers.TimedRotatingFileHandler',
+#             'filename': BASE_DIR / "logs" / "app.log",
+#             'level': 'ERROR',
+#             'when': 'midnight',
+#             'interval': 1,
+#             'backupCount': 15,
+#             'formatter': 'details'
+#         },
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'simple',
+#         }
+#     },
+
+#     'root': {
+#         'handlers': ['app_file', 'error_file', 'console'],
+#         'level': 'INFO',
+#     },
+# }
+
+
+# --------------------------------
+# advanced logging by using custom formatter filter
+# --------------------------------
+
+# ! in this config, i replced the default format structure with json-based format
 LOGGING = {
-    "version": 1,  # the dictConfig format version
-    "disable_existing_loggers": False,  # retain the default loggers
-    "handlers": {
-        "file": {
-            "class": "logging.FileHandler",
-            "filename": "general.log",
+    'version': 1,
+    'disable_existing_loggers': False,
+
+    'formatters': {
+        'simple': {
+            'format': "{levelname}: {message}",
+            'style': '{',
         },
+        'json': {
+            '()': "base.logging_utils.formatter_filter.JsonFormatter",
+            'style': '{',
+        }
+    },
+
+    'handlers': {
+        'app_file': {
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': BASE_DIR / "logs" / "app.log",
+            'level': 'INFO',
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 15,
+            'formatter': 'json'
+        },
+        'error_file': {
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': BASE_DIR / "logs" / "app.log",
+            'level': 'ERROR',
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 15,
+            'formatter': 'json'
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        }
+    },
+
+    'root': {
+        'handlers': ['app_file', 'error_file', 'console'],
+        'level': 'INFO',
     },
 }
+
+
+
+# --------------------------------
+# Workflow of logging system
+# --------------------------------
+
+#   logger.info(...)
+#       ↓
+#   Logger
+#       ↓
+#   LogRecord + extra
+#       ↓
+#   Filter
+#       ↓
+#   Handler
+#       ↓
+#   Formatter

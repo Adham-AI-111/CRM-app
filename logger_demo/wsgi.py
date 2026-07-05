@@ -1,5 +1,5 @@
 """
-WSGI config for CRM_Project project.
+WSGI config for logger_demo project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
